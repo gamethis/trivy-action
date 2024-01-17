@@ -151,6 +151,7 @@ if [ $trivyIgnores ];then
     fi
   done
   ARGS="$ARGS --ignorefile ./trivyignores.yaml"
+fi
 if [ $trivyIgnores ];then
   for f in $(echo $trivyIgnores | tr "," "\n")
   do
@@ -164,6 +165,7 @@ if [ $trivyIgnores ];then
     fi
   done
   ARGS="$ARGS --ignorefile ./trivyignores.json"
+fi
 if [ $trivyIgnores ];then
   for f in $(echo $trivyIgnores | tr "," "\n")
   do
