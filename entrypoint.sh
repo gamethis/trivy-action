@@ -141,7 +141,7 @@ fi
 if [ $trivyIgnores ];then
   for f in $(echo $trivyIgnores | tr "," "\n")
   do
-    if if [ "${f: -4}" == ".yaml" ]; then
+    if [ "${f: -4}" == ".yaml" ]; then
       echo "Found ignorefile '${f}':"
       cat "${f}"
       cat "${f}" >> ./trivyignores.yaml
@@ -155,7 +155,7 @@ fi
 if [ $trivyIgnores ];then
   for f in $(echo $trivyIgnores | tr "," "\n")
   do
-    if if [ "${f: -4}" == ".json" ]; then
+    if [ "${f: -4}" == ".json" ]; then
       echo "Found ignorefile '${f}':"
       cat "${f}"
       cat "${f}" >> ./trivyignores.json
