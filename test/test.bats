@@ -68,6 +68,14 @@ bats_load_library bats-file
   assert_files_equal image-trivyignores.test ./test/data/image-trivyignores.test
 }
 
+@test "trivy image with trivyIgnores option for yaml file" {
+  # cat ./test/data/.trivyignore1.yaml ./test/data/.trivyignore2.yaml > ./trivyignores.yaml ; trivy image --severity CRITICAL  --output image-trivyignores.test --ignorefile ./trivyignores.yaml knqyf263/vuln-image:1.2.3
+  run ./entrypoint.sh '-a image' '-i knqyf263/vuln-image:1.2.3' '-h image-trivyignores.test' '-g CRITICAL' '-t ./test/data/.trivyignore1.yaml,./test/data/.trivyignore2.yaml'
+  run diff image-trivyignores.test ./test/data/image-trivyignores.test
+  echo "$output"
+  assert_files_equal image-trivyignores.test ./test/data/image-trivyignores.test
+}
+
 @test "trivy image with sbom output" {
   # trivy image --format  github knqyf263/vuln-image:1.2.3
   run ./entrypoint.sh  "-a image" "-b github" "-i knqyf263/vuln-image:1.2.3"
