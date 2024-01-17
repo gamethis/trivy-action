@@ -138,11 +138,36 @@ fi
 if [ $tfVars ] && [ "$scanType" == "config" ];then
   ARGS="$ARGS --tf-vars $tfVars"
 fi 
-
 if [ $trivyIgnores ];then
   for f in $(echo $trivyIgnores | tr "," "\n")
   do
-    if [ -f "$f" ]; then
+    if if [ "${f: -4}" == ".yaml" ]; then
+      echo "Found ignorefile '${f}':"
+      cat "${f}"
+      cat "${f}" >> ./trivyignores.yaml
+    else
+      echo "ERROR: cannot find ignorefile '${f}'."
+      exit 1
+    fi
+  done
+  ARGS="$ARGS --ignorefile ./trivyignores.yaml"
+if [ $trivyIgnores ];then
+  for f in $(echo $trivyIgnores | tr "," "\n")
+  do
+    if if [ "${f: -4}" == ".json" ]; then
+      echo "Found ignorefile '${f}':"
+      cat "${f}"
+      cat "${f}" >> ./trivyignores.json
+    else
+      echo "ERROR: cannot find ignorefile '${f}'."
+      exit 1
+    fi
+  done
+  ARGS="$ARGS --ignorefile ./trivyignores.json"
+if [ $trivyIgnores ];then
+  for f in $(echo $trivyIgnores | tr "," "\n")
+  do
+    if [ -f "$f" ] && [ ] ; then
       echo "Found ignorefile '${f}':"
       cat "${f}"
       cat "${f}" >> ./trivyignores
