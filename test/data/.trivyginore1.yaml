@@ -1,0 +1,5 @@
+---
+# test data #1 for trivy-ignores option
+vulnerabilities:
+  - id: CVE-2020-25576
+  - id: CVE-2019-15551
